@@ -13,19 +13,16 @@ const settings: GenerateOptions = {
       ) {
         meta.removeProperty('createdAt', false);
         meta.removeProperty('updatedAt', false);
-        meta.addProperty(
-          {
-            name: '_track',
-            kind: ReferenceKind.EMBEDDED,
-            optional: true,
-            nullable: true,
-            type: 'Track',
-            runtimeType: 'Track',
-            prefix: false,
-            object: false,
-          },
-          false,
-        );
+        meta.addProperty({
+          name: '_track',
+          kind: ReferenceKind.EMBEDDED,
+          optional: true,
+          nullable: true,
+          type: 'Track',
+          runtimeType: 'Track',
+          prefix: false,
+          object: false,
+        });
         meta.sync();
       }
     }
@@ -36,28 +33,22 @@ const settings: GenerateOptions = {
       embeddable: true,
       relations: [],
     });
-    trackClass.addProperty(
-      {
-        name: 'createdAt',
-        fieldNames: ['created_at'],
-        columnTypes: ['datetime'],
-        type: 'datetime',
-        runtimeType: 'Date',
-        defaultRaw: 'CURRENT_TIMESTAMP',
-      },
-      false,
-    );
-    trackClass.addProperty(
-      {
-        name: 'updatedAt',
-        fieldNames: ['updated_at'],
-        columnTypes: ['datetime'],
-        type: 'datetime',
-        runtimeType: 'Date',
-        defaultRaw: 'CURRENT_TIMESTAMP',
-      },
-      false,
-    );
+    trackClass.addProperty({
+      name: 'createdAt',
+      fieldNames: ['created_at'],
+      columnTypes: ['datetime'],
+      type: 'datetime',
+      runtimeType: 'Date',
+      defaultRaw: 'CURRENT_TIMESTAMP',
+    });
+    trackClass.addProperty({
+      name: 'updatedAt',
+      fieldNames: ['updated_at'],
+      columnTypes: ['datetime'],
+      type: 'datetime',
+      runtimeType: 'Date',
+      defaultRaw: 'CURRENT_TIMESTAMP',
+    });
     trackClass.sync();
 
     metadata.push(trackClass);

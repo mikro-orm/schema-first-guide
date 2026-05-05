@@ -1,18 +1,16 @@
 {
-    "compilerOptions": {
-      "module": "NodeNext",
-      "moduleResolution": "NodeNext",
-      "target": "ES2022",
-      "strict": true,
-      "outDir": "dist",
-      "declaration": true,
-      "experimentalDecorators": true
-    },
-    "include": [
-      "./src/**/*.ts"
-    ],
-    "ts-node": {
-      "esm": true,
-      "transpileOnly": true
-    }
-  }
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+    "strict": true,
+    "skipLibCheck": true,
+    "rootDir": "./src",
+    "outDir": "dist",
+    "declaration": true,
+    "experimentalDecorators": true
+  },
+  "include": [
+    "./src/**/*.ts"
+  ]
+}

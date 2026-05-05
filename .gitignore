@@ -1,2 +1,4 @@
 /dist
 node_modules
+tsconfig.tsbuildinfo
+src/migrations/.snapshot-blog_test_*.json

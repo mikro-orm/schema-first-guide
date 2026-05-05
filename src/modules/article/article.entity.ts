@@ -1,4 +1,5 @@
-import { Collection, Embedded, Entity, Formula, ManyToMany, ManyToOne, OneToMany, type Opt, PrimaryKey, Property, type Rel, Unique } from '@mikro-orm/core';
+import { Collection, type Opt, type Rel } from '@mikro-orm/core';
+import { Embedded, Entity, Formula, ManyToMany, ManyToOne, OneToMany, PrimaryKey, Property, Unique } from '@mikro-orm/decorators/legacy';
 import { ArticleTag } from '../article/articletag.entity.js';
 import { Base } from '../common/base.entity.js';
 import { Comment } from '../article/comment.entity.js';
@@ -28,7 +29,7 @@ export abstract class _Article extends Base {
   @ManyToOne({ entity: () => User, fieldName: 'author', index: 'fk_article_user1_idx' })
   author!: Rel<User>;
 
-  @Formula((alias) => "(select count(*) from `comments` where `article` = ??.`id`)".replaceAll('??', alias), { type: 'integer', unsigned: true, lazy: true })
+  @Formula((cols) => `(select count(*) from \`comments\` where \`article\` = ${cols.id})`, { type: 'integer', unsigned: true, lazy: true })
   commentsCount: number & Opt = 0;
 
   @Embedded({ entity: () => Track, prefix: false, nullable: true })

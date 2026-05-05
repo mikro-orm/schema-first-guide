@@ -1,5 +1,5 @@
 import type { GenerateOptions } from '@mikro-orm/core';
-import { type SqlEntityManager, Utils } from '@mikro-orm/mysql';
+import { Utils } from '@mikro-orm/core';
 
 const settings: GenerateOptions = {
   fileName: (entityName) => {
@@ -27,28 +27,12 @@ const settings: GenerateOptions = {
       if (!commentEntity) {
         return;
       }
-      const em = platform
-        .getConfig()
-        .getDriver()
-        .createEntityManager() as SqlEntityManager;
-      const qb = em
-        .getKnex()
-        .queryBuilder()
-        .count()
-        .from(commentEntity.tableName)
-        .where(
-          commentEntity.properties.article.fieldNames[0],
-          '=',
-          em
-            .getKnex()
-            .raw('??.??', [
-              em.getKnex().raw('??'),
-              commentEntity.properties.id.fieldNames[0],
-            ]),
-        );
+      const articleColumn = commentEntity.properties.article.fieldNames[0];
+      const idColumn = commentEntity.properties.id.fieldNames[0];
+      const formulaSql = `(select count(*) from \`${commentEntity.tableName}\` where \`${articleColumn}\` = ??.\`${idColumn}\`)`;
       const formula = Utils.createFunction(
         new Map(),
-        `return (alias) => ${JSON.stringify(`(${qb.toSQL().sql})`)}.replaceAll('??', alias)`,
+        `return (alias) => ${JSON.stringify(formulaSql)}.replaceAll('??', alias)`,
       );
 
       articleEntity.addProperty({

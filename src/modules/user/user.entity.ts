@@ -1,4 +1,5 @@
-import { Collection, Embedded, Entity, EntityRepositoryType, type Hidden, type IType, OneToMany, PrimaryKey, Property, type Rel, Unique } from '@mikro-orm/core';
+import { Collection, EntityRepositoryType, type Hidden, type IType, type Rel } from '@mikro-orm/core';
+import { Embedded, Entity, OneToMany, PrimaryKey, Property, Unique } from '@mikro-orm/decorators/legacy';
 import { Article } from '../article/article.customEntity.js';
 import { Base } from '../common/base.entity.js';
 import { Comment } from '../article/comment.entity.js';

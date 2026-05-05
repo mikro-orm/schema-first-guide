@@ -1,7 +1,6 @@
 import { FastifyInstance } from 'fastify';
 import { afterAll, beforeAll, expect, test } from 'vitest';
 import { initTestApp } from './utils.js';
-import { EntityData } from '@mikro-orm/core';
 import { User } from '../src/modules/user/user.entity.js';
 import { initORM } from '../src/db.js';
 
@@ -16,9 +15,9 @@ afterAll(async () => {
   const db = await initORM();
   try {
     const fork = db.em.fork();
-    await fork.removeAndFlush(
+    await fork.remove(
       await fork.findOneOrFail(User, { email: 'foo@bar.com' }),
-    );
+    ).flush();
   } catch (e: unknown) {
     console.error(e);
   }

@@ -1,4 +1,5 @@
-import { Entity, ManyToOne, PrimaryKeyProp, type Rel } from '@mikro-orm/core';
+import { PrimaryKeyProp, type Rel } from '@mikro-orm/core';
+import { Entity, ManyToOne } from '@mikro-orm/decorators/legacy';
 import { Article } from '../article/article.customEntity.js';
 import { Base } from '../common/base.entity.js';
 import { Tag } from '../article/tag.entity.js';

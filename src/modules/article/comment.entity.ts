@@ -1,4 +1,5 @@
-import { Embedded, Entity, ManyToOne, PrimaryKey, Property, type Rel } from '@mikro-orm/core';
+import { type Rel } from '@mikro-orm/core';
+import { Embedded, Entity, ManyToOne, PrimaryKey, Property } from '@mikro-orm/decorators/legacy';
 import { Article } from '../article/article.customEntity.js';
 import { Base } from '../common/base.entity.js';
 import { Track } from '../common/track.entity.js';
