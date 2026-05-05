@@ -1,7 +1,7 @@
-import { Entity, OptionalProps, type Rel } from '@mikro-orm/core';
+import { OptionalProps, type Rel } from '@mikro-orm/core';
+import { Entity } from '@mikro-orm/decorators/legacy';
 import { _Article } from './article.entity.js';
 import { User } from '../user/user.entity.js';
-import { Track } from '../common/track.entity.js';
 
 function convertToSlug(text: string) {
   return text

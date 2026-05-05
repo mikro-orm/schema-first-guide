@@ -6,36 +6,40 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "regen": "rimraf -g ./src/**/*.entity.ts && npx mikro-orm-esm generate-entities --save",
+    "regen": "rimraf -g ./src/**/*.entity.ts && npx mikro-orm generate-entities --save",
     "build": "tsc --build",
     "check": "tsc --noEmit",
     "start:prod": "node ./dist/server.js",
-    "start": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/server.ts",
+    "start": "tsx src/server.ts",
     "test": "vitest"
   },
   "author": "",
   "license": "MIT",
   "mikro-orm": {
-    "useTsNode": true
+    "preferTs": true
   },
   "dependencies": {
-    "@fastify/jwt": "^8.0.1",
-    "@mikro-orm/core": "6.2.10-dev.114",
-    "@mikro-orm/migrations": "6.2.10-dev.114",
-    "@mikro-orm/mysql": "6.2.10-dev.114",
-    "argon2": "^0.40.3",
-    "fastify": "^4.28.1",
-    "zod": "^3.23.8"
+    "@fastify/jwt": "^10.0.0",
+    "@mikro-orm/core": "^7.0.14",
+    "@mikro-orm/decorators": "^7.0.14",
+    "@mikro-orm/migrations": "^7.0.14",
+    "@mikro-orm/mysql": "^7.0.14",
+    "@mikro-orm/sql": "^7.0.14",
+    "argon2": "^0.44.0",
+    "fastify": "^5.8.5",
+    "fastify-plugin": "^5.0.1",
+    "reflect-metadata": "^0.2.2",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@mikro-orm/cli": "6.2.10-dev.114",
-    "@mikro-orm/entity-generator": "6.2.10-dev.114",
-    "@types/node": "^20.14.10",
+    "@mikro-orm/cli": "^7.0.14",
+    "@mikro-orm/entity-generator": "^7.0.14",
+    "@types/node": "^25.6.0",
     "@types/pluralize": "^0.0.33",
     "pluralize": "^8.0.0",
     "rimraf": "^6.0.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.3",
-    "vitest": "^2.0.2"
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.5"
   }
 }

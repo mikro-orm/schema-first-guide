@@ -1,4 +1,4 @@
-import { defineConfig, type MikroORMOptions } from '@mikro-orm/mysql';
+import { defineConfig, type Options } from '@mikro-orm/mysql';
 import {
   UnderscoreNamingStrategy,
   type GenerateOptions,
@@ -6,15 +6,18 @@ import {
 import { Migrator } from '@mikro-orm/migrations';
 import pluralize from 'pluralize';
 import { join, dirname } from 'node:path';
-import { sync } from 'globby';
+import { globSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const isInMikroOrmCli =
-  process.argv[1]?.endsWith(join('@mikro-orm', 'cli', 'esm')) ?? false;
+  process.argv[1]?.endsWith(join('@mikro-orm', 'cli', 'esm')) ||
+  process.argv[1]?.endsWith(join('@mikro-orm', 'cli', 'cli.js')) ||
+  process.argv[1]?.endsWith(join('@mikro-orm', 'cli')) ||
+  false;
 const isRunningGenerateEntities =
   isInMikroOrmCli && process.argv[2] === 'generate-entities';
 
-const mikroOrmExtensions: MikroORMOptions['extensions'] = [Migrator];
+const mikroOrmExtensions: NonNullable<Options['extensions']> = [Migrator];
 
 const fileNameFunctions: NonNullable<GenerateOptions['fileName']>[] = [];
 const onInitialMetadataFunctions: NonNullable<
@@ -30,7 +33,7 @@ if (isInMikroOrmCli) {
   );
   if (isRunningGenerateEntities) {
     const fileDir = dirname(fileURLToPath(import.meta.url));
-    const genExtensionFiles = sync('./modules/**/*.gen.ts', { cwd: fileDir });
+    const genExtensionFiles = globSync('./modules/**/*.gen.ts', { cwd: fileDir });
     for (const file of genExtensionFiles) {
       const genExtension = (await import(file)).default as GenerateOptions;
       if (genExtension.fileName) {
@@ -74,6 +77,7 @@ export default defineConfig({
     }
   },
   entityGenerator: {
+    entityDefinition: 'decorators',
     scalarTypeInDecorator: true,
     fileName: (entityName) => {
       for (const f of fileNameFunctions) {

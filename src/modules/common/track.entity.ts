@@ -1,4 +1,4 @@
-import { Embeddable, Property } from '@mikro-orm/core';
+import { Embeddable, Property } from '@mikro-orm/decorators/legacy';
 import { Base } from '../common/base.entity.js';
 
 @Embeddable()

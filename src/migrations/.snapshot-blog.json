@@ -2,26 +2,109 @@
   "namespaces": [],
   "tables": [
     {
+      "name": "article_tags",
       "columns": {
-        "id": {
-          "name": "id",
+        "article_id": {
+          "name": "article_id",
           "type": "int",
           "unsigned": true,
-          "autoincrement": true,
+          "autoincrement": false,
           "primary": true,
           "nullable": false,
+          "unique": false,
           "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
           "mappedType": "integer"
         },
-        "name": {
-          "name": "name",
-          "type": "varchar(20)",
-          "unsigned": false,
+        "tag_id": {
+          "name": "tag_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": true,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "integer"
+        }
+      },
+      "indexes": [
+        {
+          "columnNames": [
+            "article_id",
+            "tag_id"
+          ],
+          "composite": true,
+          "constraint": true,
+          "keyName": "PRIMARY",
+          "primary": true,
+          "unique": true
+        },
+        {
+          "columnNames": [
+            "tag_id"
+          ],
+          "composite": false,
+          "constraint": false,
+          "keyName": "fk_article_tag_tag1_idx",
+          "primary": false,
+          "unique": false
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "fk_article_tag_article1": {
+          "columnNames": [
+            "article_id"
+          ],
+          "constraintName": "fk_article_tag_article1",
+          "localTableName": "article_tags",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "articles"
+        },
+        "fk_article_tag_tag1": {
+          "columnNames": [
+            "tag_id"
+          ],
+          "constraintName": "fk_article_tag_tag1",
+          "localTableName": "article_tags",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "tags"
+        }
+      },
+      "comment": ""
+    },
+    {
+      "name": "articles",
+      "columns": {
+        "author": {
+          "name": "author",
+          "type": "int",
+          "unsigned": true,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "length": 20,
-          "mappedType": "string"
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "integer"
         },
         "created_at": {
           "name": "created_at",
@@ -30,41 +113,31 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "unique": false,
           "length": null,
+          "precision": null,
+          "scale": null,
           "default": "CURRENT_TIMESTAMP",
+          "comment": null,
+          "enumItems": [],
           "mappedType": "datetime"
         },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "datetime",
+        "description": {
+          "name": "description",
+          "type": "varchar(1000)",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "length": null,
-          "default": "CURRENT_TIMESTAMP",
-          "mappedType": "datetime"
-        }
-      },
-      "name": "tags",
-      "indexes": [
-        {
-          "keyName": "PRIMARY",
-          "columnNames": [
-            "id"
-          ],
-          "composite": false,
-          "constraint": true,
-          "primary": true,
-          "unique": true
-        }
-      ],
-      "checks": [],
-      "foreignKeys": {},
-      "nativeEnums": {}
-    },
-    {
-      "columns": {
+          "unique": false,
+          "length": 1000,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "string"
+        },
         "id": {
           "name": "id",
           "type": "int",
@@ -72,109 +145,13 @@
           "autoincrement": true,
           "primary": true,
           "nullable": false,
+          "unique": false,
           "length": null,
-          "mappedType": "integer"
-        },
-        "full_name": {
-          "name": "full_name",
-          "type": "varchar(255)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 255,
-          "mappedType": "string"
-        },
-        "email": {
-          "name": "email",
-          "type": "varchar(255)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 255,
-          "mappedType": "string"
-        },
-        "password": {
-          "name": "password",
-          "type": "varchar(255)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 255,
-          "mappedType": "string"
-        },
-        "bio": {
-          "name": "bio",
-          "type": "text",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 65535,
-          "mappedType": "text"
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "datetime",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": null,
-          "default": "CURRENT_TIMESTAMP",
-          "mappedType": "datetime"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "datetime",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": null,
-          "default": "CURRENT_TIMESTAMP",
-          "mappedType": "datetime"
-        }
-      },
-      "name": "users",
-      "indexes": [
-        {
-          "columnNames": [
-            "email"
-          ],
-          "composite": false,
-          "keyName": "email_UNIQUE",
-          "constraint": true,
-          "primary": false,
-          "unique": true
-        },
-        {
-          "keyName": "PRIMARY",
-          "columnNames": [
-            "id"
-          ],
-          "composite": false,
-          "constraint": true,
-          "primary": true,
-          "unique": true
-        }
-      ],
-      "checks": [],
-      "foreignKeys": {},
-      "nativeEnums": {}
-    },
-    {
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "int",
-          "unsigned": true,
-          "autoincrement": true,
-          "primary": true,
-          "nullable": false,
-          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
           "mappedType": "integer"
         },
         "slug": {
@@ -184,27 +161,13 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "unique": true,
           "length": 255,
-          "mappedType": "string"
-        },
-        "title": {
-          "name": "title",
-          "type": "varchar(255)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 255,
-          "mappedType": "string"
-        },
-        "description": {
-          "name": "description",
-          "type": "varchar(1000)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 1000,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
           "mappedType": "string"
         },
         "text": {
@@ -214,8 +177,115 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "unique": false,
           "length": 65535,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
           "mappedType": "text"
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "string"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "CURRENT_TIMESTAMP",
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "datetime",
+          "extra": "on update CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": [
+        {
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "keyName": "PRIMARY",
+          "primary": true,
+          "unique": true
+        },
+        {
+          "columnNames": [
+            "author"
+          ],
+          "composite": false,
+          "constraint": false,
+          "keyName": "fk_article_user1_idx",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "slug"
+          ],
+          "composite": false,
+          "constraint": true,
+          "keyName": "slug_UNIQUE",
+          "primary": false,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "fk_article_user1": {
+          "columnNames": [
+            "author"
+          ],
+          "constraintName": "fk_article_user1",
+          "localTableName": "articles",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "users"
+        }
+      },
+      "comment": ""
+    },
+    {
+      "name": "comments",
+      "columns": {
+        "article": {
+          "name": "article",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "integer"
         },
         "author": {
           "name": "author",
@@ -224,7 +294,13 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "unique": false,
           "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
           "mappedType": "integer"
         },
         "created_at": {
@@ -234,74 +310,15 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "unique": false,
           "length": null,
+          "precision": null,
+          "scale": null,
           "default": "CURRENT_TIMESTAMP",
+          "comment": null,
+          "enumItems": [],
           "mappedType": "datetime"
         },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "datetime",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": null,
-          "default": "CURRENT_TIMESTAMP",
-          "mappedType": "datetime"
-        }
-      },
-      "name": "articles",
-      "indexes": [
-        {
-          "columnNames": [
-            "slug"
-          ],
-          "composite": false,
-          "keyName": "slug_UNIQUE",
-          "constraint": true,
-          "primary": false,
-          "unique": true
-        },
-        {
-          "columnNames": [
-            "author"
-          ],
-          "composite": false,
-          "keyName": "fk_article_user1_idx",
-          "constraint": false,
-          "primary": false,
-          "unique": false
-        },
-        {
-          "keyName": "PRIMARY",
-          "columnNames": [
-            "id"
-          ],
-          "composite": false,
-          "constraint": true,
-          "primary": true,
-          "unique": true
-        }
-      ],
-      "checks": [],
-      "foreignKeys": {
-        "articles_author_foreign": {
-          "constraintName": "articles_author_foreign",
-          "columnNames": [
-            "author"
-          ],
-          "localTableName": "articles",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "referencedTableName": "users",
-          "updateRule": "cascade"
-        }
-      },
-      "nativeEnums": {}
-    },
-    {
-      "columns": {
         "id": {
           "name": "id",
           "type": "int",
@@ -309,7 +326,13 @@
           "autoincrement": true,
           "primary": true,
           "nullable": false,
+          "unique": false,
           "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
           "mappedType": "integer"
         },
         "text": {
@@ -319,39 +342,14 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "unique": false,
           "length": 1000,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
           "mappedType": "string"
-        },
-        "article": {
-          "name": "article",
-          "type": "int",
-          "unsigned": true,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": null,
-          "mappedType": "integer"
-        },
-        "author": {
-          "name": "author",
-          "type": "int",
-          "unsigned": true,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": null,
-          "mappedType": "integer"
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "datetime",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": null,
-          "default": "CURRENT_TIMESTAMP",
-          "mappedType": "datetime"
         },
         "updated_at": {
           "name": "updated_at",
@@ -360,159 +358,321 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "unique": false,
           "length": null,
+          "precision": null,
+          "scale": null,
           "default": "CURRENT_TIMESTAMP",
-          "mappedType": "datetime"
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "datetime",
+          "extra": "on update CURRENT_TIMESTAMP"
         }
       },
-      "name": "comments",
       "indexes": [
         {
-          "columnNames": [
-            "article"
-          ],
-          "composite": false,
-          "keyName": "fk_comment_article1_idx",
-          "constraint": false,
-          "primary": false,
-          "unique": false
-        },
-        {
-          "columnNames": [
-            "author"
-          ],
-          "composite": false,
-          "keyName": "fk_comment_user1_idx",
-          "constraint": false,
-          "primary": false,
-          "unique": false
-        },
-        {
-          "keyName": "PRIMARY",
           "columnNames": [
             "id"
           ],
           "composite": false,
           "constraint": true,
+          "keyName": "PRIMARY",
           "primary": true,
           "unique": true
+        },
+        {
+          "columnNames": [
+            "article"
+          ],
+          "composite": false,
+          "constraint": false,
+          "keyName": "fk_comment_article1_idx",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "author"
+          ],
+          "composite": false,
+          "constraint": false,
+          "keyName": "fk_comment_user1_idx",
+          "primary": false,
+          "unique": false
         }
       ],
       "checks": [],
       "foreignKeys": {
-        "comments_article_foreign": {
-          "constraintName": "comments_article_foreign",
+        "fk_comment_article1": {
           "columnNames": [
             "article"
           ],
+          "constraintName": "fk_comment_article1",
           "localTableName": "comments",
           "referencedColumnNames": [
             "id"
           ],
-          "referencedTableName": "articles",
-          "updateRule": "cascade"
+          "referencedTableName": "articles"
         },
-        "comments_author_foreign": {
-          "constraintName": "comments_author_foreign",
+        "fk_comment_user1": {
           "columnNames": [
             "author"
           ],
+          "constraintName": "fk_comment_user1",
           "localTableName": "comments",
           "referencedColumnNames": [
             "id"
           ],
-          "referencedTableName": "users",
-          "updateRule": "cascade"
+          "referencedTableName": "users"
         }
       },
-      "nativeEnums": {}
+      "comment": ""
     },
     {
+      "name": "tags",
       "columns": {
-        "article_id": {
-          "name": "article_id",
-          "type": "int",
-          "unsigned": true,
+        "created_at": {
+          "name": "created_at",
+          "type": "datetime",
+          "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "unique": false,
           "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "CURRENT_TIMESTAMP",
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "datetime"
+        },
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
           "mappedType": "integer"
         },
-        "tag_id": {
-          "name": "tag_id",
-          "type": "int",
-          "unsigned": true,
+        "name": {
+          "name": "name",
+          "type": "varchar(20)",
+          "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "unique": false,
+          "length": 20,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "string"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
           "length": null,
-          "mappedType": "integer"
+          "precision": null,
+          "scale": null,
+          "default": "CURRENT_TIMESTAMP",
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "datetime",
+          "extra": "on update CURRENT_TIMESTAMP"
         }
       },
-      "name": "article_tags",
       "indexes": [
         {
           "columnNames": [
-            "article_id"
+            "id"
           ],
           "composite": false,
-          "keyName": "article_tags_article_id_index",
-          "constraint": false,
-          "primary": false,
-          "unique": false
-        },
-        {
-          "columnNames": [
-            "tag_id"
-          ],
-          "composite": false,
-          "keyName": "fk_article_tag_tag1_idx",
-          "constraint": false,
-          "primary": false,
-          "unique": false
-        },
-        {
-          "keyName": "PRIMARY",
-          "columnNames": [
-            "article_id",
-            "tag_id"
-          ],
-          "composite": true,
           "constraint": true,
+          "keyName": "PRIMARY",
           "primary": true,
           "unique": true
         }
       ],
       "checks": [],
-      "foreignKeys": {
-        "article_tags_article_id_foreign": {
-          "constraintName": "article_tags_article_id_foreign",
-          "columnNames": [
-            "article_id"
-          ],
-          "localTableName": "article_tags",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "referencedTableName": "articles",
-          "updateRule": "cascade"
+      "foreignKeys": {},
+      "comment": ""
+    },
+    {
+      "name": "users",
+      "columns": {
+        "bio": {
+          "name": "bio",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": 65535,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
         },
-        "article_tags_tag_id_foreign": {
-          "constraintName": "article_tags_tag_id_foreign",
-          "columnNames": [
-            "tag_id"
-          ],
-          "localTableName": "article_tags",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "referencedTableName": "tags",
-          "updateRule": "cascade"
+        "created_at": {
+          "name": "created_at",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "CURRENT_TIMESTAMP",
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "datetime"
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": true,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "string"
+        },
+        "full_name": {
+          "name": "full_name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "string"
+        },
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "integer"
+        },
+        "password": {
+          "name": "password",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "string"
+        },
+        "social": {
+          "name": "social",
+          "type": "json",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "json"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "CURRENT_TIMESTAMP",
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "datetime",
+          "extra": "on update CURRENT_TIMESTAMP"
         }
       },
-      "nativeEnums": {}
+      "indexes": [
+        {
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "keyName": "PRIMARY",
+          "primary": true,
+          "unique": true
+        },
+        {
+          "columnNames": [
+            "email"
+          ],
+          "composite": false,
+          "constraint": true,
+          "keyName": "email_UNIQUE",
+          "primary": false,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {},
+      "comment": ""
     }
   ],
+  "views": [],
   "nativeEnums": {}
 }
