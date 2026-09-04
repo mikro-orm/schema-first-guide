@@ -1,6 +1,6 @@
-import { hash, verify, needsRehash, type Options } from 'argon2';
+import { hash, verify, needsRehash, type HashOptions } from 'argon2';
 
-const hashOptions: Options = {
+const hashOptions: HashOptions = {
   hashLength: 100,
 };
 
