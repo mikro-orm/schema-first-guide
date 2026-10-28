@@ -34,7 +34,7 @@
   "devDependencies": {
     "@mikro-orm/cli": "^7.0.14",
     "@mikro-orm/entity-generator": "^7.0.14",
-    "@types/node": "^25.6.0",
+    "@types/node": "^26.0.0",
     "@types/pluralize": "^0.0.33",
     "pluralize": "^8.0.0",
     "rimraf": "^6.0.1",
